@@ -10,15 +10,33 @@ def handle_start(message):
 
 @bot.message_handler(commands=['help'])
 def handle_help(message):
-    bot.send_message(message.chat.id, "Доступные команды:  ...")
-    # Допиши команды бота
+    bot.send_message(message.chat.id, """
+    🤖 *Доступные команды бота*:
 
+    /start — Начать общение с ботом. Вы получите приветственное сообщение.
+
+    /help — Показать это справочное сообщение.
+
+    /show_city <цвет> <город> — Показать указанный город на карте.
+    Пример: `/show_city blue Tokyo`
+    Если цвет не указан Код не сработает.
+
+    /remember_city <город> — Сохранить город в ваш список посещённых.
+    Пример: `/remember_city London`
+
+    /show_my_cities — Показать все ваши сохранённые города на карте.
+
+    📍 Убедитесь, что названия городов пишутся на *английском языке*.
+    """)
 
 @bot.message_handler(commands=['show_city'])
 def handle_show_city(message):
     city_name = message.text.split()[-1]
+    color = message.text.split()[1] 
+    
     # Реализуй отрисовку города по запросу
-    manager.draw_distance(city_name)
+    
+    manager.draw_distance(city_name, color)
     bot.send_photo(message.chat.id, open('map.png', 'rb'))
 
 
@@ -35,6 +53,7 @@ def handle_remember_city(message):
 def handle_show_visited_cities(message):
     cities = manager.select_cities(message.chat.id)
     # Реализуй отрисовку всех городов
+
 
 
 if __name__=="__main__":

@@ -61,13 +61,13 @@ class DB_Map():
     def create_grapf(self, path, cities):
         pass
         
-    def draw_distance(self, city1):
+    def draw_distance(self, city1, color):
         coords = self.get_coordinates(city1)
         ax = plt.axes(projection=ccrs.Mollweide())
         ax.stock_img()
         ax.coastlines()
         plt.plot([coords[1]], [coords[0]],
-            color='blue', linewidth=2, marker='o',
+            color = color, linewidth=2, marker='o',
             transform = ccrs.Geodetic(),  
         )
         plt.savefig('map.png')
